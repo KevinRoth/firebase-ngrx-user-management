@@ -33,7 +33,7 @@ export class LoginEffects {
         if (authData) {
           /// User logged in
           console.debug('USER', authData);
-          return zip(from(authData.getIdToken(true))).pipe(
+          return zip(from(authData.getIdToken())).pipe(
             switchMap(res => {
               console.debug('providers found', authData.providerData);
               const providers = authData.providerData.reduce((prev, current) => {
@@ -44,7 +44,7 @@ export class LoginEffects {
                 return prev;
               }, {});
               console.debug(providers, authData.providerData.map(p => p.providerId));
-              const user = new User(authData.uid, authData.displayName, authData.email, authData.phoneNumber, authData.photoURL, authData.emailVerified);
+              const user = new User(authData.uid, authData.displayName, authData.email, authData.phoneNumber, authData.photoURL, authData.emailVerified, authData['xa']);
               return from([new SetProviders(providers), new userActions.Authenticated({user})]);
             })
           );

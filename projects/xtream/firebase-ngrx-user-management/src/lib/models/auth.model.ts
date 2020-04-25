@@ -5,6 +5,7 @@ export interface IUser {
   photoURL?: string;
   phoneNumber: string;
   emailVerified?: boolean;
+  authToken?: any;
 }
 
 export class User implements IUser {
@@ -14,7 +15,8 @@ export class User implements IUser {
               public email: string,
               public phoneNumber: string,
               public photoURL?: string,
-              public emailVerified?: boolean
+              public emailVerified?: boolean,
+              public authToken?: any
   ) {
   }
 }
